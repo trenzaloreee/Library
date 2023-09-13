@@ -1,5 +1,7 @@
 package library;
 
+import library.exceptions.BookNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,19 +14,16 @@ public class User {
         borrowedBooks = new ArrayList();
     }
 
-    public void borrowBook(Book book) {
+    public void borrowBook(Book book, Library library) throws BookNotFoundException{
         if (book.isAvailable()) {
             borrowedBooks.add(book);
             book.borrowBook();
-        }else {
-            System.out.println("This book is currently borrowed");
+            library.removeBookFromSet(book);
+            System.out.println("User " + name + " has borrowed " + " " + book.getName() + " by " + book.getAuthor());
+        } else {
+            throw new BookNotFoundException("This book is currently borrowed");
+//            System.out.println("This book is currently borrowed");
         }
-    }
-
-    public void borrowBook(String name){
-//        try {
-//            library.getBookByName(name);
-//        }
     }
 
 

@@ -14,13 +14,39 @@ public class Library {
         users = new ArrayList<User>();
     }
 
-    public Book getBookByName(String name) throws BookNotFoundException {
-        for (Book b : books) {
-
-        }
-
-
-        List list = books.stream().filter(b -> name.equals(((Book)b).getName())).collect(Collectors.toList());
+    public boolean addBook(Book book) {
+        return books.add(book);
     }
+
+    public void addUser(User user){
+        users.add(user);
+    }
+
+    public void borrowBook(User user, String title, String author) {
+       Book book = new Book(title,author);
+       try {
+           user.borrowBook(book, this);
+       } catch (BookNotFoundException e) {
+           e.printStackTrace();
+       }
+    }
+
+
+    public void removeBookFromSet(Book book){
+        books.remove(book);
+    }
+
+    public void returnBook (User user, String bookTitle, String author){
+        books.add(new Book(bookTitle, author));
+    }
+
+//    public Book getBookByName(String name) throws BookNotFoundException {
+//        for (Book b : books) {
+//
+//        }
+//
+//
+//        List list = books.stream().filter(b -> name.equals(((Book)b).getName())).collect(Collectors.toList());
+//    } не работает из-за метода getBook()
 
 }
