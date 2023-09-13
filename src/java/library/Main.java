@@ -14,7 +14,7 @@ public class Main {
             user.printBorrowedBooks();
             user.borrowBook(book, library);
         } catch (BookNotFoundException e) {
-            e.getMessage();         // TODO понять почему исключение не возникает (то есть почему кника найдена)
+            e.printStackTrace();
         }
 
         user.returnBook(book);

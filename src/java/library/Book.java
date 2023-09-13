@@ -9,9 +9,11 @@ public class Book {
     private Library library;
 
     public Book(String name, String author) {
+        //todo привязать книгу к библиотеке (конструктор книги)
         this.name = name;
         this.author = author;
         available = true;
+        library.addBook(this);
     }
 
     public void borrowBook() {
