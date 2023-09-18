@@ -1,5 +1,6 @@
 package library;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Book {
@@ -9,11 +10,16 @@ public class Book {
     private Library library;
 
     public Book(String name, String author) {
-        //todo привязать книгу к библиотеке (конструктор книги)
         this.name = name;
         this.author = author;
         available = true;
-        library.addBook(this);
+    }
+
+    public Book(String name, String author, Library library) {      // todo what if book already in library (шаблоны фабрика и адаптер) // garbage collection
+        this(name,author);                                          // todo algorithms e.g. binary search
+        if (library.addBook(this)) {                                // todo later spring
+            this.library = library;
+        }
     }
 
     public void borrowBook() {
@@ -69,5 +75,11 @@ public class Book {
         return available;
     }
 
+    public void setLibrary(Library library) {
+        this.library = library;
+    }
 
+    public Library getLibrary() {
+        return library;
+    }
 }

@@ -15,7 +15,13 @@ public class Library {
     }
 
     public boolean addBook(Book book) {
-        return books.add(book);
+        if (books.add(book)) {
+            book.getLibrary().removeBookFromSet(book);
+            book.setLibrary(this);
+            return true;
+        }
+
+        return false;
     }
 
     public void addUser(User user){
@@ -50,3 +56,4 @@ public class Library {
 //    } не работает из-за метода getBook()
 
 }
+

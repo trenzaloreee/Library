@@ -5,9 +5,9 @@ import library.exceptions.BookNotFoundException;
 public class Main {
     public static void main(String[] args) {
         User user = new User("Ivan");
-        Book book = new Book("myBook", "myAuthor");
         Library library = new Library();
-//        library.addBook(book);
+        Book book = new Book("myBook", "myAuthor", library);
+        library.addBook(book);
 
         try {
             user.borrowBook(book, library);
