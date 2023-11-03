@@ -1,34 +1,33 @@
 package library;
 
 import library.exceptions.BookNotFoundException;
-import library.testClasses.LibraryInterface;
 import library.testClasses.Size;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class Library implements LibraryInterface {
+public class SmallLibrary {
     private Set books;
     private List users;
 
-    private int smallBooks;     // todo
-    private int bigBooks;          // todo change value in addBook
+    private int smallBooks;
+    private int bigBooks;
 
-    public Library() {
+    public SmallLibrary() {
         books = new HashSet<Book>();
         users = new ArrayList<User>();
     }
 
-    public boolean addBook(Book book) {
-        if (books.add(book)) {
+    public boolean putBook(Book book) {
+        if (book.getSize() == Size.SMALL && books.add(book)) {
             if (book.getLibrary() != null) {
                 book.getLibrary().removeBookFromSet(book);
             }
             book.setLibrary(this);
-            if (book.getSize() == Size.BIG) {
-                bigBooks++;
-            } else {
-                smallBooks++;
-            }
+            smallBooks++;
+
             return true;
         }
         return false;
@@ -69,4 +68,3 @@ public class Library implements LibraryInterface {
         System.out.println(books);
     }
 }
-

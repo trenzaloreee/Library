@@ -1,23 +1,28 @@
 package library;
 
-import java.util.List;
+import library.testClasses.LibraryInterface;
+import library.testClasses.Size;
+
 import java.util.Objects;
 
 public class Book {
     private String name;
     private String author;
     private boolean available;
-    private Library library;
+    private LibraryInterface library;
 
-    public Book(String name, String author) {
+    private Size size;  // todo BIG SMALL
+
+    public Book(String name, String author, Size size) {
         this.name = name;
         this.author = author;
         available = true;
+        this.size = size;
     }
 
-    public Book(String name, String author, Library library) {      // todo what if book already in library (шаблоны фабрика и адаптер) // garbage collection
-        this(name,author);                                          // todo algorithms e.g. binary search
-        if (library.addBook(this)) {                                // todo later spring
+    public Book(String name, String author, Library library, Size size) {      // todo what if book already in library (шаблоны фабрика и адаптер) // garbage collection
+        this(name,author, size);                                          // todo algorithms e.g. binary search (test program for binary search HW + adapter)
+        if (library.addBook(this)) {                                // todo later spring -> sql
             this.library = library;
         }
     }
@@ -30,17 +35,18 @@ public class Book {
         available = true;
     }
 
+
+
 //    public void changeAvailability() {
 //        available = !available;
 //    }
-
-
     @Override
     public String toString() {
         return "library.Book{" +
                 "name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", available=" + available +
+                ", size=" + size +
                 '}';
     }
 
@@ -75,11 +81,17 @@ public class Book {
         return available;
     }
 
-    public void setLibrary(Library library) {
+    public void setLibrary(LibraryInterface library) {
         this.library = library;
     }
 
-    public Library getLibrary() {
+    public LibraryInterface getLibrary() {
         return library;
     }
+
+
+    public Size getSize() {
+        return size;
+    }
+
 }
